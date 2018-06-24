@@ -107,18 +107,18 @@
       <!-- END Site Header -->
 
       <!-- Media Container -->
-      <div class="media-container">
+      <div class="media-container" style="background-image: url({{ asset('img/cover-photo.png') }});background-position: center;     background-size: cover;height: 475px">
         <!-- Intro -->
-        <section class="site-section site-section-light site-section-top">
+        {{-- <section class="site-section site-section-light site-section-top">
           <div class="container text-center">
             <h1 class="animation-slideDown"><strong>Welcome to our Online Store!</strong></h1>
             <h2 class="h3 animation-slideUp hidden-xs">Explore over 5.000 products!</h2>
           </div>
-        </section>
+        </section> --}}
         <!-- END Intro -->
 
         <!-- For best results use an image with a resolution of 2560x279 pixels -->
-        <img src="{{ asset('img/placeholders/headers/store_home.jpg') }}" alt="" class="media-image animation-pulseSlow">
+        {{-- <img src="{{ asset('img/cover-photo.png') }}" alt="" class="media-image animation-pulseSlow"> --}}
       </div>
       <!-- END Media Container -->
 
