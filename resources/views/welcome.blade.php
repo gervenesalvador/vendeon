@@ -25,28 +25,31 @@
       <h2 class="site-heading"><strong>New</strong> Arrivals</h2>
       <hr>
       <div class="row store-items">
-        <div class="col-md-4 visibility-none" data-toggle="animation-appear" data-animation-class="animation-fadeInQuick" data-element-offset="-100">
-          <div class="store-item">
-            <div class="store-item-rating text-warning">
-              <i class="fa fa-star"></i>
-              <i class="fa fa-star"></i>
-              <i class="fa fa-star"></i>
-              <i class="fa fa-star"></i>
-              <i class="fa fa-star-half-o"></i>
-            </div>
-            <div class="store-item-image">
-              <a href="ecom_product.html">
-                <img src="{{ asset('img/placeholders/photos/photo26.jpg') }}" alt="" class="img-responsive">
-              </a>
-            </div>
-            <div class="store-item-info clearfix">
-              <span class="store-item-price themed-color-dark pull-right">$ 79</span>
-              <a href="ecom_product.html"><strong>Sport Shoes</strong></a><br>
-              <small><i class="fa fa-shopping-cart text-muted"></i> <a href="javascript:void(0)" class="text-muted">Add to cart</a></small>
+        @foreach($products as $product)
+          <div class="col-md-4 visibility-none" data-toggle="animation-appear" data-animation-class="animation-fadeInQuick" data-element-offset="-100">
+            <div class="store-item">
+              <div class="store-item-rating text-warning">
+                <i class="fa fa-star"></i>
+                <i class="fa fa-star"></i>
+                <i class="fa fa-star"></i>
+                <i class="fa fa-star"></i>
+                <i class="fa fa-star-half-o"></i>
+              </div>
+              <div class="store-item-image">
+                <a href="#">
+                  <img src="{{ asset('products').'/'.$product->photo->photo }}" alt="" class="img-responsive">
+                </a>
+              </div>
+              <div class="store-item-info clearfix">
+                <a href="ecom_product.html"><strong>{{ $product->title }}</strong></a><br>
+                <s class="store-item-compared-price">&#8369; {{ $product->compared_at_price }}</s>
+                <span class="store-item-price themed-color-dark">&#8369; {{ $product->price }} Sale</span>
+                {{-- <small><i class="fa fa-shopping-cart text-muted"></i> <a href="javascript:void(0)" class="text-muted">Add to cart</a></small> --}}
+              </div>
             </div>
           </div>
-        </div>
-        <div class="col-md-4 visibility-none" data-toggle="animation-appear" data-animation-class="animation-fadeInQuick" data-element-offset="-100">
+        @endforeach
+        {{-- <div class="col-md-4 visibility-none" data-toggle="animation-appear" data-animation-class="animation-fadeInQuick" data-element-offset="-100">
           <div class="store-item">
             <div class="store-item-rating text-warning">
               <i class="fa fa-star"></i>
@@ -66,8 +69,8 @@
               <small><i class="fa fa-shopping-cart text-muted"></i> <a href="javascript:void(0)" class="text-muted">Add to cart</a></small>
             </div>
           </div>
-        </div>
-        <div class="col-md-4 visibility-none" data-toggle="animation-appear" data-animation-class="animation-fadeInQuick" data-element-offset="-100">
+        </div> --}}
+        {{-- <div class="col-md-4 visibility-none" data-toggle="animation-appear" data-animation-class="animation-fadeInQuick" data-element-offset="-100">
           <div class="store-item">
             <div class="store-item-rating text-warning">
               <i class="fa fa-star"></i>
@@ -87,7 +90,7 @@
               <small><i class="fa fa-shopping-cart text-muted"></i> <a href="javascript:void(0)" class="text-muted">Add to cart</a></small>
             </div>
           </div>
-        </div>
+        </div> --}}
         <div class="col-md-12 text-right">
           <a href="ecom_product_list.html"><strong>View All</strong> <i class="fa fa-arrow-right"></i></a>
         </div>
@@ -95,7 +98,7 @@
       <!-- END New Arrivals -->
 
       <!-- Best Sellers -->
-      <h2 class="site-heading"><strong>Best</strong> Sellers</h2>
+      {{-- <h2 class="site-heading"><strong>Best</strong> Sellers</h2>
       <hr>
       <div class="row store-items">
         <div class="col-md-4 visibility-none" data-toggle="animation-appear" data-animation-class="animation-fadeInQuick" data-element-offset="-100">
@@ -227,7 +230,7 @@
         <div class="col-md-12 text-right">
           <a href="ecom_product_list.html"><strong>View All</strong> <i class="fa fa-arrow-right"></i></a>
         </div>
-      </div>
+      </div> --}}
       <!-- END Best Sellers -->
     </div>
   </section>

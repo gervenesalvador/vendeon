@@ -72,3 +72,21 @@ header nav {
     border-radius: 3px;
     text-transform: uppercase;
 }
+
+.store-item-price {
+    font-size: 16px;
+    color: #ff2e2e;
+}
+
+.store-item-info a {
+    color: black;
+}
+
+.store-item-info a strong {
+    font-size: 18px;
+}
+
+.store-item-compared-price {
+    font-size: 16px;
+    font-weight: bold;
+}
