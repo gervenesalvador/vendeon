@@ -25,6 +25,8 @@ Route::post('/admin', 'AdminController@login')->name('admin_login');
 Route::group(['middleware' => ['auth', 'admin'], 'prefix' => 'admin'], function () {
     Route::get('/home', 'AdminController@home');
     Route::get('/products', 'ProductController@index');
+    Route::get('/product/{product}', 'ProductController@view');
     Route::get('/product/create', 'ProductController@create');
+    Route::post('/product', 'ProductController@store')->name('store_product');
 });
 

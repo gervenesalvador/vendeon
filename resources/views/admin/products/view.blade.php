@@ -6,189 +6,185 @@
     <div class="content-header">
         <div class="header-section">
             <h1>
-                <i class="gi gi-notes_2"></i>Form General Elements<br><small>Clean and professional forms for your UI!</small>
+                <i class="gi gi-notes_2"></i><small>Products</small><br>Add Product
             </h1>
         </div>
     </div>
     <ul class="breadcrumb breadcrumb-top">
-        <li>Forms</li>
-        <li><a href="">General</a></li>
+        <li><a href="{{ url('/') }}/admin/products">General</a></li>
+        <li>Add Product</li>
     </ul>
 
-    <div class="row">
-        <div class="col-md-12">
-            <!-- Basic Form Elements Block -->
-            <div class="block">
-                <!-- Basic Form Elements Title -->
-                <div class="block-title">
-                    <div class="block-options pull-right">
-                        <a href="javascript:void(0)" class="btn btn-alt btn-sm btn-default toggle-bordered enable-tooltip" data-toggle="button" title="Toggles .form-bordered class">No Borders</a>
-                    </div>
-                    <h2><strong>Basic Form</strong> Elements</h2>
-                </div>
-                <!-- END Form Elements Title -->
+    <form action="{{ route('store_product') }}" method="post" enctype="multipart/form-data" class="form-horizontal">
+        @csrf
+        <div class="row">
+            <div class="col-md-8">
 
-                <!-- Basic Form Elements Content -->
-                <form action="page_forms_general.html" method="post" enctype="multipart/form-data" class="form-horizontal form-bordered" onsubmit="return false;">
+                <div class="block">
                     <div class="form-group">
-                        <label class="col-md-3 control-label">Static</label>
-                        <div class="col-md-9">
-                            <p class="form-control-static">Username</p>
+                        <label class="col-md-12" for="title">Title</label>
+                        <div class="col-md-12">
+                            <input type="text" id="title" name="title" class="form-control" placeholder="Short Sleeve T-shirt" value="{{ $product->title }}">
                         </div>
                     </div>
+
                     <div class="form-group">
-                        <label class="col-md-3 control-label" for="example-text-input">Text Input</label>
-                        <div class="col-md-9">
-                            <input type="text" id="example-text-input" name="example-text-input" class="form-control" placeholder="Text">
-                            <span class="help-block">This is a help text</span>
+                        <label class="col-md-12" for="description">Description</label>
+                        <div class="col-md-12">
+                            <textarea id="description" name="description" class="form-control">{{ $product->description }}</textarea>
                         </div>
                     </div>
+                </div>
+
+                <div class="block">
+                    <h3>Images</h3>
                     <div class="form-group">
-                        <label class="col-md-3 control-label" for="example-email-input">Email Input</label>
-                        <div class="col-md-9">
-                            <input type="email" id="example-email-input" name="example-email-input" class="form-control" placeholder="Enter Email">
-                            <span class="help-block">Please enter your email</span>
+                        <div class="col-md-12 images">
+                            <input type="file" id="images" name="images[]" class="form-control">
                         </div>
+                        <a href="#" onclick="return false;" class="col-md-12 add-images">Add image</a>
                     </div>
+                </div>
+
+                <div class="block">
+                    <h3>Pricing</h3>
                     <div class="form-group">
-                        <label class="col-md-3 control-label" for="example-password-input">Password</label>
-                        <div class="col-md-9">
-                            <input type="password" id="example-password-input" name="example-password-input" class="form-control" placeholder="Password">
-                            <span class="help-block">Please enter a complex password</span>
-                        </div>
-                    </div>
-                    <div class="form-group">
-                        <label class="col-md-3 control-label" for="example-disabled-input">Disabled Input</label>
-                        <div class="col-md-9">
-                            <input type="text" id="example-disabled-input" name="example-disabled-input" class="form-control" placeholder="Disabled" disabled>
-                        </div>
-                    </div>
-                    <div class="form-group">
-                        <label class="col-md-3 control-label" for="example-textarea-input">Textarea</label>
-                        <div class="col-md-9">
-                            <textarea id="example-textarea-input" name="example-textarea-input" rows="9" class="form-control" placeholder="Content.."></textarea>
-                        </div>
-                    </div>
-                    <div class="form-group">
-                        <label class="col-md-3 control-label" for="example-select">Select</label>
-                        <div class="col-md-9">
-                            <select id="example-select" name="example-select" class="form-control" size="1">
-                                <option value="0">Please select</option>
-                                <option value="1">Option #1</option>
-                                <option value="2">Option #2</option>
-                                <option value="3">Option #3</option>
-                            </select>
-                        </div>
-                    </div>
-                    <div class="form-group">
-                        <label class="col-md-3 control-label" for="example-multiple-select">Multiple select</label>
-                        <div class="col-md-9">
-                            <select id="example-multiple-select" name="example-multiple-select" class="form-control" size="5" multiple>
-                                <option value="1">Option #1</option>
-                                <option value="2">Option #2</option>
-                                <option value="3">Option #3</option>
-                                <option value="4">Option #4</option>
-                                <option value="5">Option #5</option>
-                                <option value="6">Option #6</option>
-                                <option value="7">Option #7</option>
-                                <option value="8">Option #8</option>
-                                <option value="9">Option #9</option>
-                                <option value="10">Option #10</option>
-                            </select>
-                        </div>
-                    </div>
-                    <div class="form-group">
-                        <label class="col-md-3 control-label">Radios</label>
-                        <div class="col-md-9">
-                            <div class="radio">
-                                <label for="example-radio1">
-                                    <input type="radio" id="example-radio1" name="example-radios" value="option1"> Option 1
-                                </label>
+                        <div class="col-md-6">
+                            <label class="col-md-12" for="price">Price</label>
+                            <div class="col-md-12">
+                                <input type="text" id="price" name="price" class="form-control" value="{{ $product->price }}">
                             </div>
-                            <div class="radio">
-                                <label for="example-radio2">
-                                    <input type="radio" id="example-radio2" name="example-radios" value="option2"> Option 2
-                                </label>
-                            </div>
-                            <div class="radio">
-                                <label for="example-radio3">
-                                    <input type="radio" id="example-radio3" name="example-radios" value="option3"> Option 3
-                                </label>
+                        </div>
+                        <div class="col-md-6">
+                            <label class="col-md-12" for="compared_at_price">Compared at price</label>
+                            <div class="col-md-12">
+                                <input type="text" id="compared_at_price" name="compared_at_price" class="form-control" value="{{ $product->compared_at_price }}">
                             </div>
                         </div>
                     </div>
+                </div>
+
+                <div class="block">
+                    <h3>Inventory</h3>
                     <div class="form-group">
-                        <label class="col-md-3 control-label">Inline Radios</label>
-                        <div class="col-md-9">
-                            <label class="radio-inline" for="example-inline-radio1">
-                                <input type="radio" id="example-inline-radio1" name="example-inline-radios" value="option1"> One
-                            </label>
-                            <label class="radio-inline" for="example-inline-radio2">
-                                <input type="radio" id="example-inline-radio2" name="example-inline-radios" value="option2"> Two
-                            </label>
-                            <label class="radio-inline" for="example-inline-radio3">
-                                <input type="radio" id="example-inline-radio3" name="example-inline-radios" value="option3"> Three
-                            </label>
-                        </div>
-                    </div>
-                    <div class="form-group">
-                        <label class="col-md-3 control-label">Checkboxes</label>
-                        <div class="col-md-9">
-                            <div class="checkbox">
-                                <label for="example-checkbox1">
-                                    <input type="checkbox" id="example-checkbox1" name="example-checkbox1" value="option1"> Option 1
-                                </label>
+                        <div class="row">
+                            <div class="col-md-6">
+                                <label class="col-md-12" for="sku">SKU (Stock Keeping Unit)</label>
+                                <div class="col-md-12">
+                                    <input type="text" id="sku" name="sku" class="form-control" value="{{ $product->sku }}">
+                                </div>
                             </div>
-                            <div class="checkbox">
-                                <label for="example-checkbox2">
-                                    <input type="checkbox" id="example-checkbox2" name="example-checkbox2" value="option2"> Option 2
-                                </label>
-                            </div>
-                            <div class="checkbox">
-                                <label for="example-checkbox3">
-                                    <input type="checkbox" id="example-checkbox3" name="example-checkbox3" value="option3"> Option 3
-                                </label>
+                            <div class="col-md-6">
+                                <label class="col-md-12" for="barcode">Barcode (ISBN, UPC, GTIN, etc.)</label>
+                                <div class="col-md-12">
+                                    <input type="text" id="barcode" name="barcode" class="form-control" value="{{ $product->barcode }}">
+                                </div>
                             </div>
                         </div>
+                        <div class="row">
+                            <div class="col-md-6">
+                                <label class="col-md-12" for="is_track_stock">Inventory policy</label>
+                                <div class="col-md-12">
+                                    <select id="is_track_stock" name="is_track_stock" class="form-control">
+                                        <option value="0">Don't track inventory</option>
+                                        <option value="1">Shopify tracks this product's inventory</option>
+                                    </select>
+                                </div>
+                            </div>
+                            <div class="col-md-6">
+                                <label class="col-md-12" for="stock">Quantity</label>
+                                <div class="col-md-12">
+                                    <input type="number" id="stock" name="stock" class="form-control" value="{{ $product->stock }}">
+                                </div>
+                            </div>
+                        </div>
                     </div>
+                </div>
+
+                <div class="block">
+                    <h3>Variants</h3>
+                    <p>Add variants if this product comes in multiple versions, like different sizes or colors.</p>
                     <div class="form-group">
-                        <label class="col-md-3 control-label">Inline Checkboxes</label>
-                        <div class="col-md-9">
-                            <label class="checkbox-inline" for="example-inline-checkbox1">
-                                <input type="checkbox" id="example-inline-checkbox1" name="example-inline-checkbox1" value="option1"> One
-                            </label>
-                            <label class="checkbox-inline" for="example-inline-checkbox2">
-                                <input type="checkbox" id="example-inline-checkbox2" name="example-inline-checkbox2" value="option2"> Two
-                            </label>
-                            <label class="checkbox-inline" for="example-inline-checkbox3">
-                                <input type="checkbox" id="example-inline-checkbox3" name="example-inline-checkbox3" value="option3"> Three
-                            </label>
+                        <div class="row" class="variants_1">
+                            <div class="col-md-4">
+                                <label class="col-md-12" for="variants[name]">Option Name</label>
+                                <div class="col-md-12">
+                                    <input type="text" id="variants[name]" name="variants[name]" class="form-control">
+                                </div>
+                            </div>
+                            <div class="col-md-8">
+                                <label class="col-md-12" for="variants[values]">Option Values</label>
+                                <div class="col-md-12">
+                                    <input type="text" id="variants[values]" name="variants[values]" class="form-control" placeholder="Seperate options with a comma">
+                                </div>
+                            </div>
                         </div>
                     </div>
-                    <div class="form-group">
-                        <label class="col-md-3 control-label" for="example-file-input">File input</label>
-                        <div class="col-md-9">
-                            <input type="file" id="example-file-input" name="example-file-input">
-                        </div>
+                </div>
+
+                <div class="block">
+                    <h3>Search engine listing preview</h3>
+                </div>
+
+                <div class="form-group form-actions">
+                    <div class="col-md-9 col-md-offset-3">
+                        <button type="submit" class="btn btn-sm btn-primary"><i class="fa fa-angle-right"></i> Submit</button>
                     </div>
-                    <div class="form-group">
-                        <label class="col-md-3 control-label" for="example-file-multiple-input">Multiple File input</label>
-                        <div class="col-md-9">
-                            <input type="file" id="example-file-multiple-input" name="example-file-multiple-input" multiple>
-                        </div>
-                    </div>
-                    <div class="form-group form-actions">
-                        <div class="col-md-9 col-md-offset-3">
-                            <button type="submit" class="btn btn-sm btn-primary"><i class="fa fa-angle-right"></i> Submit</button>
-                            <button type="reset" class="btn btn-sm btn-warning"><i class="fa fa-repeat"></i> Reset</button>
-                        </div>
-                    </div>
-                </form>
-                <!-- END Basic Form Elements Content -->
+                </div>
             </div>
-            <!-- END Basic Form Elements Block -->
+
+
+            <div class="col-md-4">
+                <div class="block">
+                    <h3>Organization</h3>
+                    <div class="form-group">
+                        <label class="col-md-12" for="type">Product type</label>
+                        <div class="col-md-12">
+                            <input type="text" id="type" name="type" class="form-control" placeholder="Short Sleeve T-shirt">
+                        </div>
+                    </div>
+
+                    <div class="form-group">
+                        <label class="col-md-12" for="collections">Collections</label>
+                        <div class="col-md-12">
+                            <input type="text" id="collections" name="collections" class="form-control" placeholder="Short Sleeve T-shirt">
+                        </div>
+                    </div>
+
+                    <div class="form-group">
+                        <label class="col-md-12" for="tags">Tags</label>
+                        <div class="col-md-12">
+                            <input type="text" id="tags" name="tags" class="form-control" placeholder="Short Sleeve T-shirt">
+                        </div>
+                    </div>
+                    
+                </div>
+            </div>
         </div>
-    </div>
-        
+    </form>
 
 @endsection
+
+@push('scripts_vendor')
+    <script src="{{ asset('admin-asset/ckeditor/ckeditor.js') }}"></script>
+@endpush
+
+@push('scripts')
+    <script type="text/javascript">
+        $(document).ready(function() {
+            CKEDITOR.replace('description');
+        });
+
+        $('.add-images').click(() => {
+            $('.images').append(`<input type="file" id="images" name="images[]" class="form-control">`);
+        });
+    </script>
+@endpush
+
+@push('styles')
+    <style type="text/css">
+        .images input {
+            margin-bottom: 10px;
+        }
+    </style>
+@endpush

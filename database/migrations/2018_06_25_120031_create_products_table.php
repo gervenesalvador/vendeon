@@ -24,8 +24,8 @@ class CreateProductsTable extends Migration
             $table->integer('stock')->default(0);
             $table->string('sku')->nullable();
             $table->string('barcode')->nullable();
-            $table->integer('type_id')->unsigned();
-            $table->integer('collection_id')->unsigned();
+            $table->string('type')->nullable();
+            $table->integer('collection_id')->default(0)->unsigned();
             $table->timestamps();
         });
     }

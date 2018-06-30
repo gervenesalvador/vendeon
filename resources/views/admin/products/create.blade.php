@@ -15,7 +15,8 @@
         <li>Add Product</li>
     </ul>
 
-    <form action="#" method="post" enctype="multipart/form-data" class="form-horizontal">
+    <form action="{{ route('store_product') }}" method="post" enctype="multipart/form-data" class="form-horizontal">
+        @csrf
         <div class="row">
             <div class="col-md-8">
 
@@ -55,16 +56,16 @@
                             </div>
                         </div>
                         <div class="col-md-6">
-                            <label class="col-md-12" for="compared_price">Compared at price</label>
+                            <label class="col-md-12" for="compared_at_price">Compared at price</label>
                             <div class="col-md-12">
-                                <input type="text" id="compared_price" name="compared_price" class="form-control">
+                                <input type="text" id="compared_at_price" name="compared_at_price" class="form-control">
                             </div>
                         </div>
                     </div>
                 </div>
 
                 <div class="block">
-                    <h3>Pricing</h3>
+                    <h3>Inventory</h3>
                     <div class="form-group">
                         <div class="row">
                             <div class="col-md-6">
@@ -104,17 +105,17 @@
                     <h3>Variants</h3>
                     <p>Add variants if this product comes in multiple versions, like different sizes or colors.</p>
                     <div class="form-group">
-                        <div class="row">
+                        <div class="row" class="variants_1">
                             <div class="col-md-4">
-                                <label class="col-md-12" for="option_name">Option Name</label>
+                                <label class="col-md-12" for="variants[name]">Option Name</label>
                                 <div class="col-md-12">
-                                    <input type="text" id="option_name" name="option_name" class="form-control">
+                                    <input type="text" id="variants[name]" name="variants[name]" class="form-control">
                                 </div>
                             </div>
                             <div class="col-md-8">
-                                <label class="col-md-12" for="option_values">Option Values</label>
+                                <label class="col-md-12" for="variants[values]">Option Values</label>
                                 <div class="col-md-12">
-                                    <input type="text" id="option_values" name="option_values" class="form-control" placeholder="Seperate options with a comma">
+                                    <input type="text" id="variants[values]" name="variants[values]" class="form-control" placeholder="Seperate options with a comma">
                                 </div>
                             </div>
                         </div>
@@ -144,9 +145,16 @@
                     </div>
 
                     <div class="form-group">
-                        <label class="col-md-12" for="type">Collections</label>
+                        <label class="col-md-12" for="collections">Collections</label>
                         <div class="col-md-12">
-                            <input type="text" id="type" name="type" class="form-control" placeholder="Short Sleeve T-shirt">
+                            <input type="text" id="collections" name="collections" class="form-control" placeholder="Short Sleeve T-shirt">
+                        </div>
+                    </div>
+
+                    <div class="form-group">
+                        <label class="col-md-12" for="tags">Tags</label>
+                        <div class="col-md-12">
+                            <input type="text" id="tags" name="tags" class="form-control" placeholder="Short Sleeve T-shirt">
                         </div>
                     </div>
                     

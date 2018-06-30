@@ -9,6 +9,9 @@ class AdminController extends Controller
 {
     public function index()
     {
+        if (Auth::check()) {
+            return redirect('admin/home');
+        }
     	return view('auth.admin-login');
     }
 
