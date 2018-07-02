@@ -20,6 +20,8 @@ Auth::routes();
 Route::get('/admin', 'AdminController@index');
 Route::post('/admin', 'AdminController@login')->name('admin_login');
 
+Route::get('test', 'HomeController@test');
+
 Route::group(['middleware' => ['auth', 'admin'], 'prefix' => 'admin'], function () {
     Route::get('/home', 'AdminController@home');
     Route::get('/products', 'ProductController@index');
