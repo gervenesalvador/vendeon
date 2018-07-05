@@ -44,6 +44,9 @@
     <link rel="stylesheet" href="{{ asset('css/style.css') }}">
     <!-- Modernizr (browser feature detection library) -->
     <script src="{{ asset('js/vendor/modernizr.min.js') }}"></script>
+
+    @stack('styles_vendor')
+    @stack('styles')
   </head>
   <body>
     <!-- Page Container -->
@@ -159,5 +162,8 @@
     <script src="{{ asset('js/vendor/bootstrap.min.js') }}"></script>
     <script src="{{ asset('js/plugins.js') }}"></script>
     <script src="{{ asset('js/app.js') }}"></script>
+
+    @stack('scripts_vendor')
+    @stack('scripts')
   </body>
 </html>

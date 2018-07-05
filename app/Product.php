@@ -6,7 +6,7 @@ use Illuminate\Database\Eloquent\Model;
 
 class Product extends Model
 {
-    protected $fillable = ['title', 'summary', 'description', 'price', 'compared_at_price', 'is_track_stock', 'stock', 'sku', 'barcode'];
+    protected $fillable = ['title', 'summary', 'description', 'price', 'compared_at_price', 'is_track_stock', 'stock', 'sku', 'barcode', 'sef_url'];
 
     public function photos()
     {
@@ -58,5 +58,15 @@ class Product extends Model
         }
 
         return "{$this->stock} in stock";
+    }
+
+    public function setSefUrlAttribute($value)
+    {
+        $this->attributes['sef_url'] = $this->slug($value);
+    }
+
+    private function slug($string)
+    {
+        return strtolower(trim(preg_replace('~[^0-9a-z]+~i', '-', html_entity_decode(preg_replace('~&([a-z]{1,2})(?:acute|cedil|circ|grave|lig|orn|ring|slash|th|tilde|uml);~i', '$1', htmlentities($string, ENT_QUOTES, 'UTF-8')), ENT_QUOTES, 'UTF-8')), '-'));
     }
 }

@@ -17,7 +17,7 @@ class ProductController extends Controller
 
     public function view(Product $product) 
     {
-    	return view('admin.products.view', compact('product'));
+    	return view('products.view', compact('product'));
     }
 
     public function create()
@@ -36,7 +36,8 @@ class ProductController extends Controller
             'is_track_stock' => $request->is_track_stock, 
             'stock' => $request->stock, 
             'sku' => $request->sku, 
-            'barcode' => $request->barcode
+            'barcode' => $request->barcode,
+            'sef_url' => $request->title
         ]);
 
         // upload image

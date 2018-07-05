@@ -1,6 +1,34 @@
 @extends('layouts.ecom')
 
 @section('content')
+
+{{-- <section class='rating-widget'>
+	<!-- Rating Stars Box -->
+	<div class='rating-stars text-center'>
+		<ul id='stars'>
+			<li class='star selected' title='Poor' data-value='1'>
+				<i class='fa fa-star fa-fw'></i>
+			</li>
+			<li class='star selected' title='Fair' data-value='2'>
+				<i class='fa fa-star fa-fw'></i>
+			</li>
+			<li class='star' title='Good' data-value='3'>
+				<i class='fa fa-star fa-fw'></i>
+			</li>
+			<li class='star' title='Excellent' data-value='4'>
+				<i class='fa fa-star fa-fw'></i>
+			</li>
+			<li class='star' title='WOW!!!' data-value='5'>
+				<i class='fa fa-star fa-fw'></i>
+			</li>
+		</ul>
+	</div>
+	<div class='success-box'>
+		<div class='clearfix'></div>
+		<div class='text-message'></div>
+		<div class='clearfix'></div>
+	</div>
+ </section> --}}
 	<!-- Product View -->
 	<section class="site-content site-section">
 		<div class="container">
@@ -27,32 +55,71 @@
 				<div class="col-sm-6 push-bit">
 					<div class="clearfix">
 						<h1>Anti-Theft Jacket</h1>
-						{{-- <div class="pull-right">
-							<span class="h2"><strong>$ 69</strong></span>
-						</div> --}}
+						<div class='rating-stars'>
+							<ul id='stars'>
+								<li class='star selected' title='Poor' data-value='1'>
+									<i class='fa fa-star fa-fw'></i>
+								</li>
+								<li class='star selected' title='Fair' data-value='2'>
+									<i class='fa fa-star fa-fw'></i>
+								</li>
+								<li class='star' title='Good' data-value='3'>
+									<i class='fa fa-star fa-fw'></i>
+								</li>
+								<li class='star' title='Excellent' data-value='4'>
+									<i class='fa fa-star fa-fw'></i>
+								</li>
+								<li class='star' title='WOW!!!' data-value='5'>
+									<i class='fa fa-star fa-fw'></i>
+								</li>
+							</ul>
+						</div>
+						<div class="price">
+							<span class="h4 compared-price"><strong><s>&#x20b1; 3,500.00</s></strong></span>
+							<span class="h4 main-price"><strong>&#x20b1; 2,000.00 Sale</strong></span>
+						</div>
+						<div class="variant">
+
+							<form action="#" method="post" enctype="multipart/form-data">
+								<div class="row">
+									<div class="col-md-6">
+										<label for="color">Color</label>
+									</div>
+									<div class="col-md-6">
+										&nbsp;
+									</div>
+								</div>
+								<div class="row">
+									<div class="col-md-6">
+										<div class="form-group">
+											<select name="color" id="color" class="form-control variant-select">
+												<option>Black</option>
+												<option>White</option>
+											</select>
+										</div>
+									</div>
+									<div class="col-md-6">
+										<div class="form-group">
+											<button class="btn btn-danger add-to-cart">Add To Cart</button>
+										</div>
+									</div>
+								</div>
+							</form>
+						</div>
+						<div class="trust-badge">
+							<img src="{{ asset('img/trust-badge.png') }}" alt="trust-badge" style="width: 100%;">
+						</div>
 						{{-- <span class="h4"><strong class="text-success">IN STOCK</strong><br><small>15 Available</small></span> --}}
 					</div>
 					<hr>
 					<p>Sed porttitor pretium venenatis. Suspendisse potenti. Aliquam quis ligula elit. Aliquam at orci ac neque semper dictum. Sed tincidunt scelerisque ligula, et facilisis nulla hendrerit non. Suspendisse potenti. Pellentesque non accumsan orci.</p>
 					<p>Sed porttitor pretium venenatis. Suspendisse potenti. Aliquam quis ligula elit. Aliquam at orci ac neque semper dictum. Sed tincidunt scelerisque ligula, et facilisis nulla hendrerit non. Suspendisse potenti. Pellentesque non accumsan orci.</p>
 					<hr>
-					<form action="ecom_shopping_cart.html" method="post" class="form-inline push-bit text-right">
-						<select id="ecom-addcart-size" name="ecom-addcart-size" class="form-control" size="1">
-							<option value="0" disabled selected>SIZE</option>
-							<option value="xs">XS</option>
-							<option value="s">S</option>
-							<option value="m">M</option>
-							<option value="l">L</option>
-							<option value="xl">XL</option>
-							<option value="xxl">XXL</option>
-						</select>
-						<button type="submit" class="btn btn-primary">Add to Cart</button>
-					</form>
 				</div>
 				<!-- END Info -->
 
 				<!-- More Info Tabs -->
-				<div class="col-xs-12 site-block">
+				{{-- <div class="col-xs-12 site-block">
 					<ul class="nav nav-tabs push-bit" data-toggle="tabs">
 						<li class="active"><a href="#product-specs">Specs</a></li>
 						<li><a href="#product-description">Description</a></li>
@@ -181,7 +248,7 @@
 							</ul>
 						</div>
 					</div>
-				</div>
+				</div> --}}
 				<!-- END More Info Tabs -->
 			</div>
 			<!-- END Product Details -->
@@ -190,3 +257,115 @@
 	</section>
 	<!-- END Product View -->
 @endsection
+
+@push('styles')
+	<style type="text/css">
+		.compared-price {
+			color: #788188;
+			margin-right: 10px;
+		}
+		.main-price {
+			color: #ff2e2e;
+		}
+		.variant {
+			margin-top: 20px;
+		}
+		.rating-stars {
+			width: 50%;
+			text-align: left;
+		}
+		.rating-stars ul {
+		  	list-style-type:none;
+		  	padding:0;
+		  	-moz-user-select:none;
+		  	-webkit-user-select:none;
+		}
+		.rating-stars ul > li.star {
+		 	display:inline-block;
+		}
+		.rating-stars ul > li.star > i.fa {
+		  	font-size: 20px;
+		  	color:#ccc;
+		}
+		.rating-stars ul > li.star.hover > i.fa {
+		  	color:#FFCC36;
+		}
+		.rating-stars ul > li.star.selected > i.fa {
+		  	color:#FF912C;
+		}
+		.form-control.variant-select {
+			font-size: 18px;
+			height: 38px;
+		}
+		.btn.add-to-cart {
+		    color: #ffffff;
+		    font-size: 18px;
+		    width: 100%;
+		    background-color: #e74c3c;
+		    border-color: #9c3428;
+		}
+		.btn.add-to-cart:hover {
+			background-color: #ef8a80;
+    		border-color: #e74c3c;
+		}
+	</style>
+@endpush
+
+@push('scripts')
+	<script type="text/javascript">
+		$(document).ready(function(){
+		  /* 1. Visualizing things on Hover - See next part for action on click */
+		  $('#stars li').on('mouseover', function(){
+		    var onStar = parseInt($(this).data('value'), 10); // The star currently mouse on
+		   
+		    // Now highlight all the stars that's not after the current hovered star
+		    $(this).parent().children('li.star').each(function(e){
+		      if (e < onStar) {
+		        $(this).addClass('hover');
+		      }
+		      else {
+		        $(this).removeClass('hover');
+		      }
+		    });
+		    
+		  }).on('mouseout', function(){
+		    $(this).parent().children('li.star').each(function(e){
+		      $(this).removeClass('hover');
+		    });
+		  });
+		  
+		  
+		  /* 2. Action to perform on click */
+		  $('#stars li').on('click', function(){
+		    var onStar = parseInt($(this).data('value'), 10); // The star currently selected
+		    var stars = $(this).parent().children('li.star');
+		    
+		    for (i = 0; i < stars.length; i++) {
+		      $(stars[i]).removeClass('selected');
+		    }
+		    
+		    for (i = 0; i < onStar; i++) {
+		      $(stars[i]).addClass('selected');
+		    }
+		    
+		    // JUST RESPONSE (Not needed)
+		    var ratingValue = parseInt($('#stars li.selected').last().data('value'), 10);
+		    var msg = "";
+		    if (ratingValue > 1) {
+		        msg = "Thanks! You rated this " + ratingValue + " stars.";
+		    }
+		    else {
+		        msg = "We will improve ourselves. You rated this " + ratingValue + " stars.";
+		    }
+		    responseMessage(msg);
+		    
+		  });
+		});
+
+
+function responseMessage(msg) {
+  $('.success-box').fadeIn(200);  
+  $('.success-box div.text-message').html("<span>" + msg + "</span>");
+}
+	</script>
+@endpush

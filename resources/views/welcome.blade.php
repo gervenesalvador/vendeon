@@ -36,12 +36,12 @@
                 <i class="fa fa-star-half-o"></i>
               </div>
               <div class="store-item-image">
-                <a href="#">
-                  <img src="{{ asset('products').'/'.$product->photo->photo }}" alt="" class="img-responsive">
+                <a href="{{ url('/') }}/product/">
+                  <img src="{{ asset('products').'/'.$product->photo->file_name }}" alt="" class="img-responsive">
                 </a>
               </div>
               <div class="store-item-info clearfix">
-                <a href="ecom_product.html"><strong>{{ $product->title }}</strong></a><br>
+                <a href="{{ url('/') }}/product/"><strong>{{ $product->title }}</strong></a><br>
                 <s class="store-item-compared-price">&#8369; {{ $product->compared_at_price }}</s>
                 <span class="store-item-price themed-color-dark">&#8369; {{ $product->price }} Sale</span>
                 {{-- <small><i class="fa fa-shopping-cart text-muted"></i> <a href="javascript:void(0)" class="text-muted">Add to cart</a></small> --}}

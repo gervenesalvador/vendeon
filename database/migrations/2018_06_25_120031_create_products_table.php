@@ -26,6 +26,7 @@ class CreateProductsTable extends Migration
             $table->string('barcode')->nullable();
             $table->string('type')->nullable();
             $table->integer('collection_id')->default(0)->unsigned();
+            $table->text('sef_url');
             $table->timestamps();
         });
     }
