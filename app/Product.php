@@ -6,7 +6,7 @@ use Illuminate\Database\Eloquent\Model;
 
 class Product extends Model
 {
-    protected $fillable = ['title', 'summary', 'description', 'price', 'compared_at_price', 'is_track_stock', 'stock', 'sku', 'barcode', 'sef_url'];
+    protected $fillable = ['title', 'summary', 'description', 'price', 'compared_at_price', 'is_track_stock', 'stock', 'sku', 'barcode', 'sef_url', 'variants_1', 'variants_2', 'variants_3'];
 
     public function photos()
     {
@@ -38,6 +38,11 @@ class Product extends Model
     	return $this->hasMany('App\ProductTag');
     }
 
+    public function carts()
+    {
+        return $this->hasMany('App\ProductVariant');
+    }
+
     public function collection()
     {
         return $this->hasOne('App\Collection');
@@ -46,7 +51,7 @@ class Product extends Model
     public function getInventoryAttribute()
     {
         $variants = $this->variants;
-        if (empty($variants) && $this->is_track_stock == 0) {
+        if (empty($variants) || $this->is_track_stock == 0) {
             return "N/A";
         }
 

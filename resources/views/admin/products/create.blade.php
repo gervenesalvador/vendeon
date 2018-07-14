@@ -107,15 +107,43 @@
                     <div class="form-group">
                         <div class="row" class="variants_1">
                             <div class="col-md-4">
-                                <label class="col-md-12" for="variants[name]">Option Name</label>
+                                <label class="col-md-12" for="variants_1">Option Name</label>
                                 <div class="col-md-12">
-                                    <input type="text" id="variants[name]" name="variants[name]" class="form-control">
+                                    <input type="text" id="variants_1" name="variants_1" class="form-control">
                                 </div>
                             </div>
                             <div class="col-md-8">
-                                <label class="col-md-12" for="variants[values]">Option Values</label>
+                                <label class="col-md-12" for="variants_1_values">Option Values</label>
                                 <div class="col-md-12">
-                                    <input type="text" id="variants[values]" name="variants[values]" class="form-control" placeholder="Seperate options with a comma">
+                                    <input type="text" id="variants_1_values" name="variants_1_values" class="form-control" placeholder="Seperate options with a comma">
+                                </div>
+                            </div>
+                        </div>
+                        <div class="row" class="variants_1">
+                            <div class="col-md-4">
+                                <label class="col-md-12" for="variants_2">Option Name</label>
+                                <div class="col-md-12">
+                                    <input type="text" id="variants_2" name="variants_2" class="form-control">
+                                </div>
+                            </div>
+                            <div class="col-md-8">
+                                <label class="col-md-12" for="variants_2_values">Option Values</label>
+                                <div class="col-md-12">
+                                    <input type="text" id="variants_2_values" name="variants_2_values" class="form-control" placeholder="Seperate options with a comma">
+                                </div>
+                            </div>
+                        </div>
+                        <div class="row" class="variants_1">
+                            <div class="col-md-4">
+                                <label class="col-md-12" for="variants_3">Option Name</label>
+                                <div class="col-md-12">
+                                    <input type="text" id="variants_3" name="variants_3" class="form-control">
+                                </div>
+                            </div>
+                            <div class="col-md-8">
+                                <label class="col-md-12" for="variants_3_variants">Option Values</label>
+                                <div class="col-md-12">
+                                    <input type="text" id="variants_3_variants" name="variants_3_variants" class="form-control" placeholder="Seperate options with a comma">
                                 </div>
                             </div>
                         </div>

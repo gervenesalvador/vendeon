@@ -4,45 +4,27 @@
 	<section class="site-content site-section">
 		<div class="container">
 			<div class="row" data-toggle="lightbox-gallery">
-				<div class="col-sm-6 push-bit">
+				<div class="col-md-6 push-bit">
 					<a href="{{ url('/') }}/products/{{ $product->photos[0]->file_name }}" class="gallery-link">
-						<img src="{{ url('/') }}/products/{{ $product->photos[0]->file_name }}" alt="" class="img-responsive push-bit">
+						<img src="{{ url('/') }}/products/{{ $product->photos[0]->file_name }}" alt="" class="img-responsive" style="margin: 0px auto 30px;">
 					</a>
 					
-						@foreach($product->photos as $key => $photo)
-							<?php $index = $key + 1; ?>
-							@if ($index % 3 == 0)
-								<div class="row push-bit">
-							@endif
-							<div class="col-xs-4" val="{{ ($key+1) % 3 }}">
-								<a href="{{ url('/') }}/products/{{ $photo->file_name }}" class="gallery-link">
-									<img src="{{ url('/') }}/products/{{ $photo->file_name }}" alt="" class="img-responsive">
-								</a>
-							</div>
-							@if ($index % 3 == 0)
-								</div>
-							@endif
-						@endforeach
-					
-					{{-- <div class="row push-bit">
-						<div class="col-xs-4">
-							<a href="{{ asset('img/placeholders/photos/photo30.jpg') }}" class="gallery-link">
-								<img src="{{ asset('img/placeholders/photos/photo30.jpg') }}" alt="" class="img-responsive">
+					@foreach($product->photos as $key => $photo)
+						<?php $index = ($key + 1) % 3; ?>
+						@if ($index == 1)
+							<div class="row push-bit">
+						@endif
+						<div class="col-xs-4" val="{{ $index }}">
+							<a href="{{ url('/') }}/products/{{ $photo->file_name }}" class="gallery-link">
+								<img src="{{ url('/') }}/products/{{ $photo->file_name }}" alt="" class="img-responsive">
 							</a>
 						</div>
-						<div class="col-xs-4">
-							<a href="{{ asset('img/placeholders/photos/photo29.jpg') }}" class="gallery-link">
-								<img src="{{ asset('img/placeholders/photos/photo29.jpg') }}" alt="" class="img-responsive">
-							</a>
-						</div>
-						<div class="col-xs-4">
-							<a href="{{ asset('img/placeholders/photos/photo28.jpg') }}" class="gallery-link">
-								<img src="{{ asset('img/placeholders/photos/photo28.jpg') }}" alt="" class="img-responsive">
-							</a>
-						</div>
-					</div> --}}
+						@if ($index == 0 || ($loop->last && $index != 0))
+							</div> 
+						@endif
+					@endforeach
 				</div>
-				<div class="col-sm-6 push-bit">
+				<div class="col-md-6 push-bit">
 					<div class="clearfix">
 						<h1>{{ $product->title }}</h1>
 						<div class='rating-stars'>
@@ -70,27 +52,28 @@
 						</div>
 						<div class="variant">
 
-							<form action="#" method="post" enctype="multipart/form-data">
+							<form action="{{ route('add_to_cart') }}" method="post" enctype="multipart/form-data" class="cart-form">
+								@csrf
+								<input type="hidden" name="product_id" value="{{ $product->id }}">
+								<input type="hidden" name="quantity" value="1">
+								<input type="hidden" name="price" value="{{ $product->price }}">
 								<div class="row">
-									<div class="col-md-6">
-										<label for="color">Color</label>
-									</div>
-									<div class="col-md-6">
-										&nbsp;
-									</div>
-								</div>
-								<div class="row">
-									<div class="col-md-6">
-										<div class="form-group">
-											<select name="color" id="color" class="form-control variant-select">
-												<option>Black</option>
-												<option>White</option>
-											</select>
+									@foreach($variants as $name => $values)
+										<div class="col-md-6">
+											<label for="{{ $name }}">{{ ucfirst($name) }}</label>
+											<div class="form-group">
+												<select name="{{ $name }}" id="{{ $name }}" class="form-control variant-select">
+													@foreach($values as $key => $value)
+														<option value="{{ $value }}">{{ $value }}</option>
+													@endforeach
+												</select>
+											</div>
 										</div>
-									</div>
+									@endforeach
+									
 									<div class="col-md-6">
 										<div class="form-group">
-											<button class="btn btn-danger add-to-cart">Add To Cart</button>
+											<button class="btn btn-danger add-to-cart" type="submit">Add To Cart</button>
 										</div>
 									</div>
 								</div>
@@ -122,7 +105,6 @@
 			margin-top: 20px;
 		}
 		.rating-stars {
-			width: 50%;
 			text-align: left;
 		}
 		.rating-stars ul {
@@ -154,10 +136,23 @@
 		    width: 100%;
 		    background-color: #e74c3c;
 		    border-color: #9c3428;
+		    margin-top: 24px;
 		}
 		.btn.add-to-cart:hover {
 			background-color: #ef8a80;
     		border-color: #e74c3c;
+		}
+		.cart-form .row {
+			display: flex; */
+		    display: -webkit-box;
+		    display: -webkit-flex;
+		    display: -ms-flexbox;
+		    display: flex;
+		    flex-wrap: wrap;
+		}
+		.cart-form .row .col-md-6 {
+			display: flex;
+    		flex-direction: column;
 		}
 	</style>
 @endpush
@@ -207,11 +202,10 @@
 		    
 		  });
 		});
-
-
-function responseMessage(msg) {
-  $('.success-box').fadeIn(200);  
-  $('.success-box div.text-message').html("<span>" + msg + "</span>");
-}
+		
+		function responseMessage(msg) {
+		  $('.success-box').fadeIn(200);  
+		  $('.success-box div.text-message').html("<span>" + msg + "</span>");
+		}
 	</script>
 @endpush

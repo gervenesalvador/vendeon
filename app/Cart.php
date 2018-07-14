@@ -3,17 +3,13 @@
 namespace App;
 
 use Illuminate\Database\Eloquent\Model;
-use App\Cart;
 
 class Cart extends Model
 {
-    public function index()
-    {
+	protected $fillable = ['product_id', 'quantity', 'variants_1', 'variants_2', 'variants_3', 'price'];
 
-    }
-
-    public function store()
-    {
-    	$
-    }
+	public function product()
+	{
+		return $this->belongsTo('App\Product');
+	}
 }

@@ -31,7 +31,7 @@
                     @foreach($products as $pkey => $product)
                         <tr>
                             <td class="text-center"><input type="checkbox"></td>
-                            <td class="text-center"><img src="{{ asset('products').'/'.$product->photo->photo }}" alt="{{ $product->title }}" style="width: 70px"></td>
+                            <td class="text-center"><img src="{{ asset('products').'/'.$product->photo->file_name }}" alt="{{ $product->title }}" style="width: 70px"></td>
                             <td><a href="{{ url('/') }}/admin/product/{{ $product->id }}">{{ $product->title }}</a></td>
                             <td class="text-center">{{ $product->inventory }}</td>
                             <td class="text-center">{{ $product->type }}</td>

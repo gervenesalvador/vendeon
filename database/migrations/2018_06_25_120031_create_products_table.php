@@ -27,6 +27,9 @@ class CreateProductsTable extends Migration
             $table->string('type')->nullable();
             $table->integer('collection_id')->default(0)->unsigned();
             $table->text('sef_url');
+            $table->string('variants_1')->nullable();
+            $table->string('variants_2')->nullable();
+            $table->string('variants_3')->nullable();
             $table->timestamps();
         });
     }

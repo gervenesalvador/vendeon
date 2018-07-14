@@ -100,7 +100,7 @@
           <div class="col-md-2">
             <ul class="nav-icons">
               <li>
-                <a href="#"><i class="fa fa-shopping-cart fa-2x"></i></a>
+                <a href="{{ route('cart') }}"><i class="fa fa-shopping-cart fa-2x"></i></a>
               </li>
             </ul>
           </div>

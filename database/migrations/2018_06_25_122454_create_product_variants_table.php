@@ -16,8 +16,9 @@ class CreateProductVariantsTable extends Migration
         Schema::create('product_variants', function (Blueprint $table) {
             $table->increments('id');
             $table->integer('product_id')->unsigned();
-            $table->string('name');
-            $table->string('value');
+            $table->string('value_1');
+            $table->string('value_2')->nullable();
+            $table->string('value_3')->nullable();
             $table->decimal('price', 10, 2)->default('0.00');
             $table->decimal('compared_at_price', 10, 2)->default('0.00');
             $table->integer('is_track_stock')->default(0);
