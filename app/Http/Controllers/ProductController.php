@@ -103,7 +103,7 @@ class ProductController extends Controller
         foreach ($request->images as $image) {
             $path = $image->storeAs('products', $image->getClientOriginalName(), 'storage');
             $product->photos()->create([
-                'photo' => $image->getClientOriginalName(),
+                'file_name' => $image->getClientOriginalName(),
             ]);
         }
 

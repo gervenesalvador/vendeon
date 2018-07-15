@@ -51,11 +51,12 @@ class CartController extends Controller
     {
         $sessions = session('cart', []);
         $carts = [];
+        $cities = Cart::cities();
 
         if (!empty($sessions)) {
             $carts = Cart::whereIn('id', $sessions)->get();
         }
-        // return $carts;
-        return view('cart.checkout', compact('carts'));
+
+        return view('cart.checkout', compact('carts', 'cities'));
     }
 }

@@ -7,7 +7,7 @@
         <div class="header-section">
             <h1>
                 <span>Products</span>
-                <span style="float: right;"><a href="{{ url('/') }}/admin/product/create" class="btn btn-primary btn-sm" style="font-size: 20px;">Add Product</a></i></span>
+                <span style="float: right;"><a href="{{ url('/') }}/admin/products/create" class="btn btn-primary btn-sm" style="font-size: 20px;">Add Product</a></i></span>
             </h1>
         </div>
     </div>
