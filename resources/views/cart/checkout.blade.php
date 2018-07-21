@@ -30,16 +30,16 @@
 					    <span class="input-group-addon">+63</span>
 					    <input type="text" id="contact_number" name="contact_number" class="form-control" placeholder="Enter Your Contact Number Here">
 					    <label for="contact_number" style="left: 50px;z-index: 3;">Contact Number</label>
-					    <span class="input-group-addon">+63</span>
+					    <span class="input-group-addon"><img src="{{ asset('img/philippine-flag.jpg') }}" alt="ph" style="width: 40px;height: 30px;"></span>
 					</div>
-	                <div class="label-custom">Shipping Information</div>
+	                <div class="label-custom" style="margin-top: 20px;">Shipping Information</div>
 					<div class="form-group form-custom">
 						<div class="row">
-							<div class="col-md-6 col-xs-12">
+							<div class="col-md-6 col-sm-6 col-xs-12">
 								<input type="text" id="firstname" name="firstname" class="form-control" placeholder="First name" required>
 								<label for="email">First name</label>
 							</div>
-							<div class="col-md-6 col-xs-12">
+							<div class="col-md-6 col-sm-6 col-xs-12">
 								<input type="text" id="lastname" name="lastname" class="form-control" placeholder="Last name" required>
 								<label for="email">Last name</label>
 							</div>
@@ -91,11 +91,11 @@
 									<div class="cart-image">
 										<img src="{{ asset('products').'/'.$cart->product->photo->file_name }}" style="width: 90px;">
 									</div>
-									<span class="label label-default"><strong>1</strong></span>
+									<span class="label label-default"><strong>{{ $cart->quantity }}</strong></span>
 								</td>
 								<td>{{ $cart->product->title }}</td>
 								<td>
-									&#8369; {{ (int)$cart->price * (int)$cart->quantity }}
+									&#8369; <span class="item-prices">{{ (int)$cart->price * (int)$cart->quantity }}</span>
 								</td>
 							</tr>
 						@endforeach
@@ -106,7 +106,7 @@
 						<tr>
 							<td>Subtotal</td>
 							<td></td>
-							<td class="computed">&#8369; 2,000</td>
+							<td>&#8369; <span class="sub_price">0</span></td>
 						</tr>
 						<tr>
 							<td>Shipping</td>
@@ -118,9 +118,9 @@
 				<table class="table price">
 					<thead>
 						<tr>
-							<td>Subtotal</td>
+							<td>Total</td>
 							<td></td>
-							<td class="total">&#8369; 2,000</td>
+							<td>&#8369; <span class="total_price">0</span></td>
 						</tr>
 					</thead>
 				</table>
@@ -237,6 +237,9 @@
 			vertical-align: middle;
 			border-color: #fff;
 		}
+		.table.price tr td:nth-child(3n+3) {
+			text-align: right;
+		}
 	</style>
 @endpush
 
@@ -246,6 +249,8 @@
 
 @push('scripts')
 	<script type="text/javascript">
+
+		compute_price();
 
 		$('#city').keyup((event) => {
 			search('#city', 'city_list');
@@ -271,8 +276,25 @@
 				}
 			}
 		}
+
 		$("#contact_number").inputmask({
 			mask: '999-999-9999'
 		});
+
+		function format (x) {
+		  	return x.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",");
+		}
+
+		function compute_price() {
+			let sub_price = 0;
+			$('.item-prices').each(function() {
+				let price = parseInt($(this).html());
+				sub_price += price;
+			});
+
+			$('.sub_price').html(format(sub_price));
+			$('.total_price').html(format(sub_price));
+		}
+
 	</script>
 @endpush
