@@ -59,4 +59,11 @@ class CartController extends Controller
 
         return view('cart.checkout', compact('carts', 'cities'));
     }
+
+    public function checkoutAction(Request $request)
+    {
+        // $validated = $request->validate([
+        //     ''
+        // ])
+    }
 }

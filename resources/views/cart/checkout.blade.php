@@ -4,7 +4,7 @@
 <section class="site-content site-section">
 	<div class="container">
 		<div class="row">
-			<div class="col-md-7" style="border-right: #000 1px solid;">
+			<div class="col-md-7" style="border-right: #ddd 1px solid;">
 				<a href="/"><h1>Vendeon</h1></a>
 				<div class="breadcrumb">
 					<li class="active">
@@ -13,14 +13,25 @@
 					<li>
 						<span>Customer Information</span>
 					</li>
+					<li>
+						<span>Shipping Method</span>
+					</li>
+					<li>
+						<span>Payment method</span>
+					</li>
 				</div>
-				<form>
+				<form action="{{ route('checkout_action') }}" method="POST">
 					<div class="label-custom">Contact Information</div>
 					<div class="form-group form-custom">
 	                    <input type="email" id="email" name="email" class="form-control" placeholder="Enter Your Email Here" required>
 	                    <label for="email">Email address</label>
 	                </div>
-
+					<div class="input-group form-custom">
+					    <span class="input-group-addon">+63</span>
+					    <input type="text" id="contact_number" name="contact_number" class="form-control" placeholder="Enter Your Contact Number Here">
+					    <label for="contact_number" style="left: 50px;z-index: 3;">Contact Number</label>
+					    <span class="input-group-addon">+63</span>
+					</div>
 	                <div class="label-custom">Shipping Information</div>
 					<div class="form-group form-custom">
 						<div class="row">
@@ -72,14 +83,15 @@
 				</form>
 			</div>
 			<div class="col-md-5">
-				<table class="table">
+				<table class="table cart">
 					<thead>
 						@foreach($carts as $key => $cart)
 							<tr>
-								<td>
+								<td style="position: relative;">
 									<div class="cart-image">
-										<img src="{{ asset('products').'/'.$cart->product->photo->file_name }}" style="width: 90px;">	
+										<img src="{{ asset('products').'/'.$cart->product->photo->file_name }}" style="width: 90px;">
 									</div>
+									<span class="label label-default"><strong>1</strong></span>
 								</td>
 								<td>{{ $cart->product->title }}</td>
 								<td>
@@ -87,6 +99,29 @@
 								</td>
 							</tr>
 						@endforeach
+					</thead>
+				</table>
+				<table class="table cart price">
+					<thead>
+						<tr>
+							<td>Subtotal</td>
+							<td></td>
+							<td class="computed">&#8369; 2,000</td>
+						</tr>
+						<tr>
+							<td>Shipping</td>
+							<td></td>
+							<td class="computed">Free</td>
+						</tr>
+					</thead>
+				</table>
+				<table class="table price">
+					<thead>
+						<tr>
+							<td>Subtotal</td>
+							<td></td>
+							<td class="total">&#8369; 2,000</td>
+						</tr>
 					</thead>
 				</table>
 			</div>
@@ -98,15 +133,34 @@
 
 @push('styles')
 	<style type="text/css">
+		.cart td {
+			position: relative;
+		}
+		.cart .label {
+			position: absolute;
+		    top: 9px;
+		    right: 13px;
+		    padding: 4px;
+		    border-radius: 50%;
+		    width: 20px;
+		    height: 20px;
+		}
 		.cart-image {
-			border: #000 1px solid;
+			position: relative;
+			border: #ddd 1px solid;
 		    border-radius: 10px;
-		    width: 90px;
+		    width: 75px;
 		    overflow: hidden;
-		    height: 90px;
+		    height: 75px;
 		}
 		.cart-image img {
-			width: 100px;
+			position: absolute;
+		    width: 90px;
+		    top: -9999px;
+		    bottom: -9999px;
+		    left: -9999px;
+		    right: -9999px;
+		    margin: auto;
 		}
 		.label-custom {
 			font-size: 20px;
@@ -146,6 +200,8 @@
 		    z-index: 1000;
 		    width: 100%;
 		    display: none;
+		    height: 250px;
+    		overflow-y: auto;
 		}
 		.form-select:focus ~ .form-select-list {
 			display: block;
@@ -159,13 +215,33 @@
     		background-color: #25bce3;
     	}
     	.form-select-list li a {
-		    
 		    text-decoration: none;
+		}
+		.table.cart {
+			border-bottom: #ddd 1px solid;
+		}
+		.table.cart,
+		.table.price {
+			margin-bottom: 0;
+		}
+		.table.price .computed {
+			text-align: right;
+			font-weight: bold;
+		}
+		.table.price .total {
+			text-align: right;
+			font-weight: bold;
+			font-size: 20px;
 		}
 		.table >thead > tr > td {
 			vertical-align: middle;
+			border-color: #fff;
 		}
 	</style>
+@endpush
+
+@push('scripts_vendor')
+	<script type="text/javascript" src="{{ asset('js/jquery.inputmask.bundle.js') }}" charset="utf-8"></script>
 @endpush
 
 @push('scripts')
@@ -195,377 +271,8 @@
 				}
 			}
 		}
-
-		const barangay = (city) => {
-			switch(city) {
-				case 'Alaminos - Pangasinan':
-					return [
-						"Alos",
-						"Amandiego",
-						"Amangbangan",
-						"Balangobong",
-						"Balayang",
-						"Bisocol",
-						"Bolaney",
-						"Baleyadaan",
-						"Bued",
-						"Cabatuan",
-						"Cayucay",
-						"Dulacac",
-						"Inerangan",
-						"Landoc",
-						"Linmansangan",
-						"Lucap",
-						"Maawi",
-						"Macatiw",
-						"Magsaysay",
-						"Mona",
-						"Palamis",
-						"Pandan",
-						"Pangapisan",
-						"Poblacion",
-						"Pocal-Pocal",
-						"Pogo",
-						"Polo",
-						"Quibuar",
-						"Sabangan",
-						"San Antonio",
-						"San Jose",
-						"San Roque",
-						"San Vicente",
-						"Santa Maria",
-						"Tanaytay",
-						"Tangcarang",
-						"Tawintawin",
-						"Telbang",
-						"Victoria",
-					];
-				break;
-				case 'Angeles - Pampanga':
-					return [
-						"Agapito del Rosario",
-						"Amsic",
-						"Anunas",
-						"Balibago",
-						"Capaya",
-						"Claro M. Recto",
-						"Cuayan",
-						"Cutcut",
-						"Cutud",
-						"Lourdes North West",
-						"Lourdes Sur (Talimundoc)",
-						"Lourdes Sur East",
-						"Malabañas",
-						"Margot",
-						"Marisol (Ninoy Aquino)",
-						"Mining",
-						"Pampang (Santo Niño)",
-						"Pandan",
-						"Pulungbulo",
-						"Pulung Cacutud",
-						"Pulung Maragul",
-						"Salapungan",
-						"San José",
-						"San Nicolas",
-						"Santa Teresita",
-						"Santa Trinidad",
-						"Santo Cristo",
-						"Santo Domingo",
-						"Santo Rosario (Población)",
-						"Sapalibutad",
-						"Sapangbato",
-						"Tabun",
-						"Virgen Delos Remedios",
-					];
-				break;
-				case 'Antipolo - Rizal':
-					return [
-						"Beverly Hills",
-						"Bagong Nayon",
-						"Calawis",
-						"Cupang",
-						"Dela Paz",
-						"Mambugan",
-						"Mayamot Dalig",
-						"Muntindilaw",
-						"Inarawan",
-						"San Isidro",
-						"San Jose",
-						"San Juan",
-						"San Luis",
-						"San Roque",
-						"Sta. Cruz",
-					];
-				break;
-				case 'Bacolod - Negros Occidental':
-					return [
-						"Alangilan",
-						"Alijis",
-						"Banago",
-						"Barangay 1 (Población)",
-						"Barangay 2 (Población)",
-						"Barangay 3 (Población)",
-						"Barangay 4 (Población)",
-						"Barangay 5 (Población)",
-						"Barangay 6 (Población)",
-						"Barangay 7 (Población)",
-						"Barangay 8 (Población)",
-						"Barangay 9 (Población)",
-						"Barangay 10 (Población)",
-						"Barangay 11 (Población)",
-						"Barangay 12 (Población)",
-						"Barangay 13 (Población)",
-						"Barangay 14 (Población)",
-						"Barangay 15 (Población)",
-						"Barangay 16 (Población)",
-						"Barangay 17 (Población)",
-						"Barangay 18 (Población)",
-						"Barangay 19 (Población)",
-						"Barangay 20 (Población)",
-						"Barangay 21 (Población)",
-						"Barangay 22 (Población)",
-						"Barangay 23 (Población)",
-						"Barangay 24 (Población)",
-						"Barangay 25 (Población)",
-						"Barangay 26 (Población)",
-						"Barangay 27 (Población)",
-						"Barangay 28 (Población)",
-						"Barangay 29 (Población)",
-						"Barangay 30 (Población)",
-						"Barangay 31 (Población)",
-						"Barangay 32 (Población)",
-						"Barangay 33 (Población)",
-						"Barangay 34 (Población)",
-						"Barangay 35 (Población)",
-						"Barangay 36 (Población)",
-						"Barangay 37 (Población)",
-						"Barangay 38 (Población)",
-						"Barangay 39 (Población)",
-						"Barangay 40 (Población)",
-						"Barangay 41 (Población)",
-						"Bata",
-						"Cabug",
-						"Estefanía",
-						"Felisa",
-						"Granada",
-						"Handumanan",
-						"Mandalagan",
-						"Mansilingan",
-						"Montevista",
-						"Pahanocoy",
-						"Punta Taytay",
-						"Singcang-Airport",
-						"Sum-ag",
-						"Taculing",
-						"Tangub",
-						"Villamonte",
-						"Vista Alegre",
-					];
-				break;
-				case 'Bago - Negros Occidental':
-					return [
-						"Abuanan",
-						"Alianza",
-						"Atipuluan",
-						"Bacong-Montilla",
-						"Bagroy",
-						"Balingasag",
-						"Binubuhan",
-						"Busay",
-						"Calumangan",
-						"Caridad",
-						"Don Jorge L. Araneta",
-						"Dulao",
-						"Ilijan",
-						"Lag-Asan",
-						"Ma-ao",
-						"Mailum",
-						"Malingin",
-						"Napoles",
-						"Pacol",
-						"Poblacion",
-						"Sagasa",
-						"Tabunan",
-						"Taloc",
-						"Sampinit",
-					];
-				break;
-				case 'Baguio - Benguet':
-					return [
-						"A. Bonifacio-Caguioa-Rimando (ABCR)",
-						"Abanao-Zandueta-Kayong-Chugum-Otek (AZKCO)",
-						"Alfonso Tabora",
-						"Ambiong",
-						"Andres Bonifacio (Lower Bokawkan)",
-						"Apugan-Loakan",
-						"Asin Road",
-						"Atok Trail",
-						"Aurora Hill Proper (Malvar-Sgt. Floresca)",
-						"Aurora Hill, North Central",
-						"Aurora Hill, South Central",
-						"Bagong Lipunan (Market Area)",
-						"Bakakeng Central",
-						"Bakakeng North",
-						"Bal-Marcoville (Marcoville)",
-						"Balsigan",
-						"Bayan Park East",
-						"Bayan Park Village",
-						"Bayan Park West (Bayan Park)",
-						"BGH Compound",
-						"Brookside",
-						"Brookspoint",
-						"Cabinet Hill-Teacher's Camp",
-						"Camdas Subdivision",
-						"Camp 7",
-						"Camp 8",
-						"Camp Allen",
-						"Campo Filipino",
-						"City Camp Central",
-						"City Camp Proper",
-						"Country Club Village",
-						"Cresencia Village",
-						"Dagsian, Lower",
-						"Dagsian, Upper",
-						"Dizon Subdivision",
-						"Dominican Hill-Mirador",
-						"Dontogan",
-						"DPS Compound",
-						"Engineers' Hill",
-						"Fairview Village",
-						"Ferdinand (Happy Homes-Campo Sioco)",
-						"Fort del Pilar",
-						"Gabriela Silang",
-						"General Emilio F. Aguinaldo (Quirino‑Magsaysay, Lower)",
-						"General Luna, Upper",
-						"General Luna, Lower",
-						"Gibraltar",
-						"Greenwater Village",
-						"Guisad Central",
-						"Guisad Sorong",
-						"Happy Hollow",
-						"Happy Homes (Happy Homes-Lucban)",
-						"Harrison-Claudio Carantes",
-						"Hillside",
-						"Holy Ghost Extension",
-						"Holy Ghost Proper",
-						"Honeymoon (Honeymoon-Holy Ghost)",
-						"Imelda R. Marcos (La Salle)",
-						"Imelda Village",
-						"Irisan",
-						"Kabayanihan",
-						"Kagitingan",
-						"Kayang Extension",
-						"Kayang-Hilltop",
-						"Kias",
-						"Legarda-Burnham-Kisad",
-						"Liwanag-Loakan",
-						"Loakan Proper",
-						"Lopez Jaena",
-						"Lourdes Subdivision Extension",
-						"Lourdes Subdivision, Lower",
-						"Lourdes Subdivision, Proper",
-						"Lualhati",
-						"Lucnab",
-						"Magsaysay Private Road",
-						"Magsaysay, Lower",
-						"Magsaysay, Upper",
-						"Malcolm Square-Perfecto (Jose Abad Santos)",
-						"Manuel A. Roxas",
-						"Market Subdivision, Upper",
-						"Middle Quezon Hill Subdivision (Quezon Hill Middle)",
-						"Military Cut-off",
-						"Mines View Park",
-						"Modern Site, East",
-						"Modern Site, West",
-						"MRR-Queen of Peace",
-						"New Lucban",
-						"Outlook Drive",
-						"Pacdal",
-						"Padre Burgos",
-						"Padre Zamora",
-						"Palma-Urbano (Cariño-Palma)",
-						"Phil-Am",
-						"Pinget",
-						"Pinsao Pilot Project",
-						"Pinsao Proper",
-						"Poliwes",
-						"Pucsusan",
-						"Quezon Hill Proper",
-						"Quezon Hill, Upper",
-						"Quirino Hill, East",
-						"Quirino Hill, Lower",
-						"Quirino Hill, Middle",
-						"Quirino Hill, West",
-						"Quirino-Magsaysay, Upper (Upper QM)",
-						"Rizal Monument Area",
-						"Rock Quarry, Lower",
-						"Rock Quarry, Middle",
-						"Rock Quarry, Upper",
-						"Saint Joseph Village",
-						"Salud Mitra",
-						"San Antonio Village",
-						"San Luis Village",
-						"San Roque Village",
-						"San Vicente",
-						"Sanitary Camp, North",
-						"Sanitary Camp, South",
-						"Santa Escolastica",
-						"Santo Rosario",
-						"Santo Tomas Proper",
-						"Santo Tomas School Area",
-						"Scout Barrio",
-						"Session Road Area",
-						"Slaughter House Area (Santo Niño Slaughter)",
-						"SLU-SVP Housing Village",
-						"South Drive",
-						"Teodora Alonzo",
-						"Trancoville",
-						"Victoria Village",
-					];
-				break;
-				case 'Bais - Negros Oriental':
-					return [
-						"Barangay I (Poblacion)",
-						"Barangay II (Poblacion)",
-						"Basak",
-						"Biñohon",
-						"Cabanlutan",
-						"Calasga-an",
-						"Cambagahan",
-						"Cambaguio",
-						"Cambanjao",
-						"Cambuilao",
-						"Canlargo",
-						"Capiñahan",
-						"Consolacion",
-						"Dansulan",
-						"Hangyad",
-						"La Paz",
-						"Lo-oc",
-						"Lonoy",
-						"Mabunao",
-						"Manlipac",
-						"Mansangaban",
-						"Okiot",
-						"Olympia",
-						"Panala-an",
-						"Panam-angan",
-						"Rosario",
-						"Sab-ahan",
-						"San Isidro",
-						"Katacgahan (Tacgahan)",
-						"Tagpo",
-						"Talungon",
-						"Tamisu",
-						"Tamogong",
-						"Tangculogan",
-						"Valencia",
-					];
-				break;
-				default:
-					return [];
-				break;
-			}
-		}
+		$("#contact_number").inputmask({
+			mask: '999-999-9999'
+		});
 	</script>
 @endpush

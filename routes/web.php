@@ -27,6 +27,7 @@ Route::post('/cart/add', 'CartController@store')->name('add_to_cart');
 Route::post('/cart/update', 'CartController@update')->name('update_cart');
 
 Route::get('/checkout', 'CartController@checkout')->name('checkout');
+Route::post('/checkout', 'CartController@checkoutAction')->name('checkout_action');
 
 Route::get('test', 'HomeController@test');
 
