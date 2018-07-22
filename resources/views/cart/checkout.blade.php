@@ -21,6 +21,7 @@
 					</li>
 				</div>
 				<form action="{{ route('checkout_action') }}" method="POST">
+					@csrf
 					<div class="label-custom">Contact Information</div>
 					<div class="form-group form-custom">
 	                    <input type="email" id="email" name="email" class="form-control" placeholder="Enter Your Email Here" required>
@@ -68,7 +69,7 @@
 	                			<input type="text" id="city" name="city" class="form-control" placeholder="City" required value="Philippines" readonly>
 	                		</div>
 	                		<div class="col-md-6 col-xs-12">
-	                			<input type="text" id="postal" name="postal" class="form-control" placeholder="Postal" required value="Philippines">
+	                			<input type="text" id="zip_code" name="zip_code" class="form-control" placeholder="Zip code" required>
 	                		</div>
 	                	</div>
 	                </div>

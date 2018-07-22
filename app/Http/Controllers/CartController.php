@@ -62,8 +62,36 @@ class CartController extends Controller
 
     public function checkoutAction(Request $request)
     {
-        // $validated = $request->validate([
-        //     ''
-        // ])
+        return $request->all();
+        $data = $request->validate([
+            'email' => 'nullable|email',
+            'contact_number' => 'required',
+            'firstname' => 'required|string',
+            'lastname' => 'required|string',
+            'city' => 'required|string',
+            'barangay' => 'required|string',
+            'address' => 'required|string',
+            'zip_code' => 'required',
+        ]);
+
+        $checkout = $request->session()->get('chechkout', []);
+        $checkout['email'] = $request->email;
+        $checkout['contact_number'] = '+63'+str_replace('-', '', $request->contact_number);
+        $checkout['firstname'] = $request->firstname;
+        $checkout['lastname'] = $request->lastname;
+        $checkout['city'] = $request->city;
+        $checkout['barangay'] = $request->barangay;
+        $checkout['address'] = $request->address;
+        $checkout['zip_code'] = $request->zip_code;
+
+        $request->session()->put('checkout', $checkout);
+
+        return redirect('shipping-method');
+        
+    }
+
+    public function shippingMethod()
+    {
+        return view('cart.shipping_method');
     }
 }

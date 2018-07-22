@@ -61,7 +61,7 @@
         <div class="container">
           <!-- Site Logo -->
           <div class="col-md-2">
-            <a href="index.html" class="site-logo">
+            <a href="{{ url('/') }}" class="site-logo">
               <img src="{{ asset('img/logo-1.png') }}" alt="Vendeon Logo">
             </a>                        
           </div>

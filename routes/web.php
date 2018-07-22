@@ -29,6 +29,9 @@ Route::post('/cart/update', 'CartController@update')->name('update_cart');
 Route::get('/checkout', 'CartController@checkout')->name('checkout');
 Route::post('/checkout', 'CartController@checkoutAction')->name('checkout_action');
 
+Route::get('/shipping-method', 'CartController@shippingMethod');
+Route::post('/shipping-method', 'CartController@shippingMethodAction')->name('shippingMethod');
+
 Route::get('test', 'HomeController@test');
 
 Route::group(['middleware' => ['auth', 'admin'], 'prefix' => 'admin'], function () {
