@@ -58,8 +58,11 @@ class CartController extends Controller
         if (!empty($session_cart)) {
             $carts = Cart::whereIn('id', $session_cart)->get();
         }
-        if (!is_null($checkout) {
+
+        if (!is_null($checkout)) {
             $checkout = Customer::find($checkout);
+
+            return $checkout;
         }
 
         return view('cart.checkout', compact('carts', 'cities', 'checkout'));
@@ -86,6 +89,7 @@ class CartController extends Controller
         $customer->city = $request->city;
         $customer->barangay = $request->barangay;
         $customer->address = $request->address;
+        $customer->country = 'Philippines';
         $customer->zip_code = $request->zip_code;
 
         if (!$customer->save()) {
@@ -108,15 +112,14 @@ class CartController extends Controller
 
     public function shippingMethod()
     {
-        $checkout = session('checkout', []);
-        if (empty($checkout)) {
+        $checkout_session = session('checkout', null);
+        if (is_null($checkout_session)) {
             return "ERROR GO BACK";
         }
-        
+        $checkout = Customer::find($checkout_session);
+
         $sessions = session('cart', []);
         $carts = [];
-        $cities = Cart::cities();
-
         if (!empty($sessions)) {
             $carts = Cart::whereIn('id', $sessions)->get();
         }

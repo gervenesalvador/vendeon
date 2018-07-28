@@ -23,13 +23,13 @@
 				<div class="details">
 					<div class="contacts">
 						<div class="col-sm-2 col-xs-3">Contact</div>
-						<div class="col-sm-8 col-xs-6">+ 99999999</div>
-						<div class="col-sm-2 col-xs-3"><a href="/test">Change</a></div>
+						<div class="col-sm-8 col-xs-6">+ 63{{ $checkout->contact_number }}</div>
+						<div class="col-sm-2 col-xs-3"><a href="/checkout">Change</a></div>
 					</div>
 					<div class="ship">
 						<div class="col-sm-2 col-xs-3">Ship to</div>
-						<div class="col-sm-8 col-xs-6">+ 99999999</div>
-						<div class="col-sm-2 col-xs-3"><a href="/test">Change</a></div>
+						<div class="col-sm-8 col-xs-6">{{ $checkout->complete_address }}</div>
+						<div class="col-sm-2 col-xs-3"><a href="/checkout">Change</a></div>
 					</div>
 				</div>
 

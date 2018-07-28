@@ -13,7 +13,7 @@ class CreateCustomerTable extends Migration
      */
     public function up()
     {
-        Schema::create('customer', function (Blueprint $table) {
+        Schema::create('customers', function (Blueprint $table) {
             $table->increments('id');
             $table->string('firstname');
             $table->string('lastname');
@@ -21,7 +21,7 @@ class CreateCustomerTable extends Migration
             $table->string('contact_number');
             $table->string('city');
             $table->string('barangay');
-            $table->string('complete_address');
+            $table->string('address');
             $table->string('country');
             $table->string('zip_code');
             $table->timestamps();
