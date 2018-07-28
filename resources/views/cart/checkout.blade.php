@@ -29,7 +29,7 @@
 	                </div>
 					<div class="input-group form-custom">
 					    <span class="input-group-addon">+63</span>
-					    <input type="text" id="contact_number" name="contact_number" class="form-control" placeholder="Enter Your Contact Number Here">
+					    <input type="text" id="contact_number" name="contact_number" class="form-control" placeholder="Enter Your Contact Number Here" autocomplete="off">
 					    <label for="contact_number" style="left: 50px;z-index: 3;">Contact Number</label>
 					    <span class="input-group-addon"><img src="{{ asset('img/philippine-flag.jpg') }}" alt="ph" style="width: 40px;height: 30px;"></span>
 					</div>

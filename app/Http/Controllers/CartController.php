@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use App\Http\Requests\CartRequest;
 use App\Cart;
+use App\Customer;
 
 class CartController extends Controller
 {
@@ -49,20 +50,23 @@ class CartController extends Controller
 
     public function checkout()
     {
-        $sessions = session('cart', []);
+        $session_cart = session('cart', []);
+        $checkout = session('checkout', null);
         $carts = [];
         $cities = Cart::cities();
 
-        if (!empty($sessions)) {
-            $carts = Cart::whereIn('id', $sessions)->get();
+        if (!empty($session_cart)) {
+            $carts = Cart::whereIn('id', $session_cart)->get();
+        }
+        if (!is_null($checkout) {
+            $checkout = Customer::find($checkout);
         }
 
-        return view('cart.checkout', compact('carts', 'cities'));
+        return view('cart.checkout', compact('carts', 'cities', 'checkout'));
     }
 
     public function checkoutAction(Request $request)
     {
-        return $request->all();
         $data = $request->validate([
             'email' => 'nullable|email',
             'contact_number' => 'required',
@@ -74,17 +78,29 @@ class CartController extends Controller
             'zip_code' => 'required',
         ]);
 
-        $checkout = $request->session()->get('chechkout', []);
-        $checkout['email'] = $request->email;
-        $checkout['contact_number'] = '+63'+str_replace('-', '', $request->contact_number);
-        $checkout['firstname'] = $request->firstname;
-        $checkout['lastname'] = $request->lastname;
-        $checkout['city'] = $request->city;
-        $checkout['barangay'] = $request->barangay;
-        $checkout['address'] = $request->address;
-        $checkout['zip_code'] = $request->zip_code;
+        $customer = new Customer;
+        $customer->email = $request->email;
+        $customer->contact_number = $request->contact_number;
+        $customer->firstname = $request->firstname;
+        $customer->lastname = $request->lastname;
+        $customer->city = $request->city;
+        $customer->barangay = $request->barangay;
+        $customer->address = $request->address;
+        $customer->zip_code = $request->zip_code;
 
-        $request->session()->put('checkout', $checkout);
+        if (!$customer->save()) {
+            return 'Error saving customer';
+        }
+
+        $request->session()->put('checkout', $customer->id);
+        $session_cart = session('cart', []);
+
+        if (empty($session_cart)) {
+            return 'Error cart';
+        }
+        foreach ($session_cart as $value) {
+            $cart = Cart::where('id', $value)->update(['customer_id' => $customer->id]);
+        }
 
         return redirect('shipping-method');
         
@@ -92,6 +108,20 @@ class CartController extends Controller
 
     public function shippingMethod()
     {
-        return view('cart.shipping_method');
+        $checkout = session('checkout', []);
+        if (empty($checkout)) {
+            return "ERROR GO BACK";
+        }
+        
+        $sessions = session('cart', []);
+        $carts = [];
+        $cities = Cart::cities();
+
+        if (!empty($sessions)) {
+            $carts = Cart::whereIn('id', $sessions)->get();
+        }
+
+        return view('cart.shipping_method', compact('carts', 'checkout'));
     }
 }
+ 
