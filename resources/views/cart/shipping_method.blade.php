@@ -34,12 +34,13 @@
 				</div>
 
 				<div class="label-custom">Shipping Information</div>
-				<form action="{{ route('shippingMethod') }}" action="POST">
+				<form action="{{ route('shippingMethod') }}" method="POST">
+					@csrf
 					<div class="details">
 						<div class="col-sm-10">
 							<div class="radio">
 		                        <label for="shipping_method">
-		                            <input type="radio" id="shipping_method" name="shipping_method" value="Standard Shipping"> Standard Shipping
+		                            <input type="radio" id="shipping_method" name="shipping_method" value="Standard Shipping" required checked> Standard Shipping
 		                        </label>
 		                    </div>
 						</div>

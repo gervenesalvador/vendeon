@@ -6,6 +6,7 @@ use Illuminate\Http\Request;
 use App\Http\Requests\CartRequest;
 use App\Cart;
 use App\Customer;
+use App\Order;
 
 class CartController extends Controller
 {
@@ -17,7 +18,7 @@ class CartController extends Controller
         if (!empty($sessions)) {
             $carts = Cart::whereIn('id', $sessions)->get();
         }
-        // return $carts;
+
     	return view('cart.index', compact('carts'));
     }
 
@@ -126,5 +127,28 @@ class CartController extends Controller
 
         return view('cart.shipping_method', compact('carts', 'checkout'));
     }
+
+    public function shippingMethodAction(Request $request)
+    {
+        $data = $request->validate([
+            'shipping_method' => 'required'
+        ]);
+
+        $orders = new Order;
+        $orders->shipping_method = $request->shipping_method;
+        $orders->customer = $request->session()->get('checkout');
+
+        if (!$orders->save()) {
+            return 'error';
+        }
+
+        $request->session()->put('order', $orders->id);
+
+        return redirect('/payment-method');
+    }
+
+    public function paymentMethod()
+    {
+        
+    }
 }
- 
