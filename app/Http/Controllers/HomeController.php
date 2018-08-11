@@ -24,13 +24,15 @@ class HomeController extends Controller
      */
     public function index()
     {
-        $products = Product::all();
+        $products = Product::take(4)->get();
 
         return view('welcome', compact('products'));
     }
 
     public function test()
     {
+        // parent::clearOrderSession();
+        return uniqid();
         // $products = Product::all();
         // foreach ($products as $key => $product) {
         //     $product->sef_url = $product->title;

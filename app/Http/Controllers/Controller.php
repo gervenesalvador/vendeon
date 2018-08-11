@@ -10,4 +10,12 @@ use Illuminate\Foundation\Auth\Access\AuthorizesRequests;
 class Controller extends BaseController
 {
     use AuthorizesRequests, DispatchesJobs, ValidatesRequests;
+
+    public static function clearOrderSession()
+    {
+    	session()->forget('cart');
+    	session()->forget('checkout');
+    	session()->forget('order');
+    	return true;
+    }
 }

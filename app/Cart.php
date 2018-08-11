@@ -14,6 +14,23 @@ class Cart extends Model
 		return $this->belongsTo('App\Product');
 	}
 
+	public static function session()
+	{
+		$sessions = session('cart', []);
+
+		if (empty($sessions)) {
+			return [
+				'result' => false,
+				'message' => 'Session is Empty'
+			];
+		}
+
+		return  [
+			'result' => true,
+			'data' => static::whereIn('id', $sessions)->get()
+		];
+	}
+
 	public static function cities()
 	{
 		return [

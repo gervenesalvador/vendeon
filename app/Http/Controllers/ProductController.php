@@ -19,19 +19,22 @@ class ProductController extends Controller
     {
         $product = Product::where('sef_url', $sef_url)->first();
         $variants = [];
+        $variants_list = [];
         if (!empty($product->variants)) {
+            $i = 1;
             if ($product->variants_1 != null) {
-                $variants['variants_1'] = $product->variants->pluck('value_1');
+                $variants[$product->variants_1] = $product->variants->pluck('value_1')->unique();
             }
             if ($product->variants_2 != null) {
-                $variants['variants_2'] = $product->variants->pluck('value_2');
+                $variants[$product->variants_2] = $product->variants->pluck('value_2')->unique();
             }
             if ($product->variants_3 != null) {
-                $variants['variants_3'] = $product->variants->pluck('value_3');
+                $variants[$product->variants_3] = $product->variants->pluck('value_3')->unique();
             }
-        }
 
-    	return view('products.view', compact('product', 'variants'));
+            $variants_list = $product->variantPriceList();
+        }
+    	return view('products.view', compact('product', 'variants', 'variants_list', 'i'));
     }
 
     public function create()
@@ -83,21 +86,6 @@ class ProductController extends Controller
             $alert['product_save'] = "Error Saving";
             return redirect('admin/products');
         }
-        // $product = Product::create([
-        //     'title' => $request->title, 
-        //     'summary' => $request->summary, 
-        //     'description' => $request->description, 
-        //     'price' => $request->price, 
-        //     'compared_at_price' => $request->compared_at_price, 
-        //     'is_track_stock' => $request->is_track_stock, 
-        //     'stock' => $request->stock, 
-        //     'sku' => $request->sku, 
-        //     'barcode' => $request->barcode,
-        //     'sef_url' => $request->title,
-        //     'variants_1' => $request->variants_1,
-        //     'variants_2' => $request->variants_2,
-        //     'variants_3' => $request->variants_3,
-        // ]);
 
         // upload image
         foreach ($request->images as $image) {
@@ -145,9 +133,6 @@ class ProductController extends Controller
                 }
             }
         }
-
-        
-
         return redirect('/admin/products');
     }
 }

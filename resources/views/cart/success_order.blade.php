@@ -6,57 +6,43 @@
 		<div class="row">
 			<div class="col-md-7" style="border-right: #ddd 1px solid;">
 				<a href="/"><h1>Vendeon</h1></a>
-				<div class="breadcrumb">
-					<li class="active">
-						<a href="/cart"><span>Cart</span></a>
-					</li>
-					<li>
-						<a href="/checkout"><span>Customer Information</span></a>
-					</li>
-					<li>
-						<span>Shipping Method</span>
-					</li>
-					<li>
-						<span>Payment method</span>
-					</li>
+				
+				<div>
+					<div>
+						<i class="fa fa-check-circle-o" style="font-size: 4.5em"></i>
+					</div>
+					<div>
+						Order #10001
+					</div>
+					<div>
+						Thank you test!
+					</div>
 				</div>
 				<div class="details">
-					<div class="contacts">
-						<div class="col-sm-2 col-xs-3">Contact</div>
-						<div class="col-sm-8 col-xs-6">+ 63{{ $checkout->contact_number }}</div>
-						<div class="col-sm-2 col-xs-3"><a href="/checkout">Change</a></div>
-					</div>
-					<div class="ship">
-						<div class="col-sm-2 col-xs-3">Ship to</div>
-						<div class="col-sm-8 col-xs-6">{{ $checkout->complete_address }}</div>
-						<div class="col-sm-2 col-xs-3"><a href="/checkout">Change</a></div>
+					<div class="details-content">
+						<h3>Your order is confirmed</h3>
+						<p>We've accepted your order, and were getting it ready. Come back to this page for updates on your order status.</p>
 					</div>
 				</div>
-
-				<div class="label-custom">Shipping Information</div>
-				<form action="{{ route('shippingMethod') }}" method="POST">
-					@csrf
-					<div class="details">
-						<div class="col-sm-10">
-							<div class="radio">
-		                        <label for="shipping_method">
-		                            <input type="radio" id="shipping_method" name="shipping_method" value="Standard Shipping Free" required checked> Standard Shipping
-		                        </label>
-		                    </div>
-						</div>
-						<div class="col-sm-2">
-							<span><strong>Free</strong></span>
-						</div>
+				<div class="details">
+					<div class="details-content">
+						<h3>Customer information</h3>
+						<table class="table">
+							<thead>
+								<tr>
+									<th>Shipping Address</th>
+									<th>Billing Address</th>
+								</tr>
+							</thead>
+							<tbody>
+								<tr>
+									<td>test</td>
+									<td>test</td>
+								</tr>
+							</tbody>
+						</table>
 					</div>
-
-					<div class="form-group">
-		            	<div class="row">
-		            		<div class="col-md-5 col-md-offset-7">
-		                		<button type="submit" class="btn btn-sm btn-primary" style=""> Continue to Payment Method</button>
-		            		</div>
-		            	</div>
-		            </div>
-				</form>
+				</div>
 			</div>
 			<div class="col-md-5">
 				<table class="table cart">
@@ -107,6 +93,64 @@
 @endsection
 @push('styles')
 	<style type="text/css">
+		.details-diffent {
+			display: none;
+		}
+		.details .fields {
+			padding-top: 10px;
+		}
+		.details h3 {
+			margin-top: 0;
+		}
+		.details p,
+		.details table {
+			margin-bottom: 0;
+		}
+		.details .fields:last-child {
+			padding-bottom: 10px;
+		}
+		.details.details-diffent {
+			overflow: -webkit-paged-x;
+		}
+
+		.form-select-list li:hover {
+    		background-color: #25bce3;
+    	}
+    	.form-select-list li a {
+		    text-decoration: none;
+		}
+		.details {
+			overflow: auto;
+			height: auto;
+			border: #dddddd 1px solid;
+			border-radius: 10px;
+			padding: 0px 15px;
+			margin-bottom: 15px;
+		}
+		.details .details-content {
+			padding: 15px 0px;
+		    /*border-bottom: #dddddd 1px solid;*/
+		    overflow: auto;
+	    	height: auto;
+		}
+		/*.details .details-content:last-child {
+			border-bottom: none;
+		}
+		.details .details-content:first-child {
+			border-bottom: #dddddd 1px solid;
+		}*/
+		.details .col-xs-3 {
+			padding: 0;
+		}
+		.details .col-xs-3 a {
+			width: 100%;
+			text-align: right;
+			display: inline-block;
+		}
+		.label-custom {
+			margin: 20px 0px;
+			font-size: 1.75em;
+		}
 		.cart td {
 			position: relative;
 		}
@@ -159,48 +203,6 @@
 		.table.price tr td:nth-child(3n+3) {
 			text-align: right;
 		}
-		.form-group {
-			margin-top: 15px;
-		}
-		.form-group .btn {
-			width: 100%;
-			height: 50px;
-			font-size: 16px;
-		}
-		.details {
-			overflow: auto;
-			height: auto;
-			border: #dddddd 1px solid;
-			border-radius: 10px;
-			padding: 15px 15px;
-		}
-		.details .contacts,
-		.details .ship {
-			overflow: auto;
-			height: auto;
-		}
-		.details .contacts {
-			padding-bottom: 15px;
-			border-bottom: #dddddd 1px solid;
-		}
-		.details .ship { 
-			padding-top: 15px;
-		}
-		.details .col-xs-3 {
-			padding: 0;
-		}
-		.details .col-xs-3 a {
-			width: 100%;
-			text-align: right;
-			display: inline-block;
-		}
-		.radio {
-			margin: 0;
-		}
-		.label-custom {
-			margin: 20px 0px;
-			font-size: 1.75em;
-		}
 	</style>
 @endpush
 
@@ -210,10 +212,6 @@
 
 @push('scripts')
 	<script type="text/javascript">
-		$("#contact_number").inputmask({
-			mask: '999-999-9999'
-		});
-
 		compute_price();
 
 		function format (x) {

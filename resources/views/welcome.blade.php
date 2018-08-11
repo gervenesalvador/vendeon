@@ -9,7 +9,7 @@
   <section class="site-content site-section">
     <div class="container">
       <!-- Seach Form -->
-      <div class="site-block">
+      {{-- <div class="site-block">
         <form action="ecom_search_results.html" method="post">
           <div class="input-group input-group-lg">
             <input type="text" id="ecom-search" name="ecom-search" class="form-control text-center" placeholder="Search Store..">
@@ -18,7 +18,7 @@
             </div>
           </div>
         </form>
-      </div>
+      </div> --}}
       <!-- END Seach Form -->
 
       <!-- New Arrivals -->
@@ -26,7 +26,7 @@
       <hr>
       <div class="row store-items">
         @foreach($products as $product)
-          <div class="col-md-4 visibility-none" data-toggle="animation-appear" data-animation-class="animation-fadeInQuick" data-element-offset="-100">
+          <div class="col-md-3 visibility-none" data-toggle="animation-appear" data-animation-class="animation-fadeInQuick" data-element-offset="-100">
             <div class="store-item">
               <div class="store-item-rating text-warning">
                 <i class="fa fa-star"></i>
@@ -248,3 +248,16 @@
     </div>
   </section>
 @endsection
+
+@push('styles')
+  <style type="text/css">
+    .store-item {
+      border: none;
+      min-height: 380px;
+      max-height: 450px;
+    }
+    .store-item-info {
+      background-color: transparent;
+    }
+  </style>
+@endpush

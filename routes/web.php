@@ -32,6 +32,12 @@ Route::post('/checkout', 'CartController@checkoutAction')->name('checkout_action
 Route::get('/shipping-method', 'CartController@shippingMethod');
 Route::post('/shipping-method', 'CartController@shippingMethodAction')->name('shippingMethod');
 
+Route::get('/payment-method', 'CartController@paymentMethod');
+Route::post('/payment-method', 'CartController@paymentMethodAction')->name('paymentMethod');
+
+Route::get('/success-order/{uid}', 'CartController@successOrder');
+
+Route::get('/cart/clear/data', 'CartCOntroller@clearSession');
 Route::get('test', 'HomeController@test');
 
 Route::group(['middleware' => ['auth', 'admin'], 'prefix' => 'admin'], function () {

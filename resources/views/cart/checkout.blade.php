@@ -47,7 +47,7 @@
 						</div>
 	                </div>
 	                <div class="form-group form-custom">
-	                	<input type="text" id="city" name="city" class="form-control form-select" placeholder="City" required>
+	                	<input type="text" id="city" name="city" class="form-control form-select" placeholder="City" required autocomplete="off">
 	                	<label for="email">City</label>
 	                	<ul id="city_list" class="form-select-list">
 	                		@foreach($cities as $key => $city)
@@ -67,9 +67,11 @@
 	                	<div class="row">
 	                		<div class="col-md-6 col-xs-12">
 	                			<input type="text" id="city" name="city" class="form-control" placeholder="City" required value="Philippines" readonly>
+	                			<label for="email">Country</label>
 	                		</div>
 	                		<div class="col-md-6 col-xs-12">
 	                			<input type="text" id="zip_code" name="zip_code" class="form-control" placeholder="Zip code" required>
+	                			<label for="email">Zip Code</label>
 	                		</div>
 	                	</div>
 	                </div>

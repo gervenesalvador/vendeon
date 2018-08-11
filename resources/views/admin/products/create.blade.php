@@ -141,9 +141,9 @@
                                 </div>
                             </div>
                             <div class="col-md-8">
-                                <label class="col-md-12" for="variants_3_variants">Option Values</label>
+                                <label class="col-md-12" for="variants_3_values">Option Values</label>
                                 <div class="col-md-12">
-                                    <input type="text" id="variants_3_variants" name="variants_3_variants" class="form-control" placeholder="Seperate options with a comma">
+                                    <input type="text" id="variants_3_values" name="variants_3_values" class="form-control" placeholder="Seperate options with a comma">
                                 </div>
                             </div>
                         </div>

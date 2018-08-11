@@ -25,7 +25,7 @@ class CreateProductsTable extends Migration
             $table->string('sku')->nullable();
             $table->string('barcode')->nullable();
             $table->string('type')->nullable();
-            $table->integer('collection_id')->default(0)->unsigned();
+            $table->integer('collection_id')->default('0')->unsigned();
             $table->text('sef_url');
             $table->string('variants_1')->nullable();
             $table->string('variants_2')->nullable();

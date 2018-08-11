@@ -29,7 +29,7 @@
 
     <!-- Stylesheets -->
     <!-- Bootstrap is included in its original form, unaltered -->
-    <link rel="stylesheet" href="{{ asset('css/bootstrap.min') }}.css">
+    <link rel="stylesheet" href="{{ asset('css/bootstrap.min.css') }}">
 
     <!-- Related styles of various icon packs and plugins -->
     <link rel="stylesheet" href="{{ asset('css/plugins.css') }}">
@@ -87,10 +87,10 @@
                 </li>
                 <!-- END Menu Toggle -->
                 <li>
-                  <a href="features.html">Home</a>
+                  <a href="/">Home</a>
                 </li>
                 <li>
-                  <a href="pricing.html">Catalog</a>
+                  <a href="/">Catalog</a>
                 </li>
               </ul>
               <!-- END Main Menu -->
