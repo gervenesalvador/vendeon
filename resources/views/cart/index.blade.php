@@ -83,7 +83,7 @@
 		.cart-item {
 		    vertical-align: middle;
 		}
-		@media screen and (min-width: 769px) {
+		@media screen and (min-width: 768px) {
 			.cart-item .col-md-4,
 			.cart-item .col-md-8,
 			.cart-item .col-md-2,
@@ -94,9 +94,12 @@
 			    float: none;
 			}
 		}
-		@media screen and (max-width: 769px) {
+		@media screen and (max-width: 768px) {
 			.cart-item .col-xs-12 {
 				margin-bottom: 10px;
+			}
+			.cart-details {
+				text-align: center;
 			}
 		}
 	</style>
