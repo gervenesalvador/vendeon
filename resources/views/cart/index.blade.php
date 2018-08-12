@@ -27,18 +27,18 @@
 							</div>
 						</div>
 					</div>
-					<div class="col-lg-4 col-md-4 col-sm-5 col-xs-12 text-center">
-						<div class="row">
-							<div class="col-xs-6 col-fix">
+					{{-- <div class="col-lg-4 col-md-4 col-sm-5 col-xs-12 text-center"> --}}
+						{{-- <div class="row"> --}}
+							<div class="col-lg-2 col-md-2 col-sm-3 col-xs-6 cart-details{{-- col-xs-6 col-fix --}}">
 								<input type="number" name="carts[1][quantity]" value="2" class="form-control quantity" data-cart="1">
 								<a href="javascript:void(0)" class="btn btn-xs btn-success quantity-plus" data-toggle="tooltip" title="Add" data-price="500" data-cart="1"><i class="fa fa-plus"></i></a>
 								<a href="javascript:void(0)" class="btn btn-xs btn-danger quantity-minus" data-toggle="tooltip" title="Remove" data-price="500" data-cart="1"><i class="fa fa-minus"></i></a>
 							</div>
-							<div class="col-xs-6 col-fix">
+							<div class="col-lg-2 col-md-2 col-sm-2 col-xs-6 cart-details{{-- col-xs-6 col-fix --}}">
 								<strong>&#x20b1; </strong><strong class="price" data-cart="1"></strong>
 							</div>
-						</div>
-					</div>
+						{{-- </div> --}}
+					{{-- </div> --}}
 				</div>
 				<div class="row">
 					<div class="col-xs-7 col-md-2 col-md-offset-6">
@@ -83,6 +83,11 @@
 		.cart-item {
 		    vertical-align: middle;
 		}
+		/*.col-fix {
+			display: table-cell;
+		    vertical-align: middle;
+		    float: none;
+		}*/
 		@media screen and (min-width: 768px) {
 			.cart-item .col-md-4,
 			.cart-item .col-md-8,
