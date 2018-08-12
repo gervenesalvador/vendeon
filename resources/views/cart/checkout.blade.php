@@ -4,7 +4,18 @@
 <section class="site-content site-section">
 	<div class="container">
 		<div class="row">
-			<div class="col-md-7" style="border-right: #ddd 1px solid;">
+			<div class="col-xs-12 mobile-cart">
+				<button class="btn btn-primary hidden visible-xs" type="button" data-toggle="collapse" data-target="#collapseExample" aria-expanded="false" aria-controls="collapseExample">
+				    Collapse Button
+				  </button>
+				  
+				<div class="collapse dont-collapse-sm" id="collapseExample">
+				    <div class="well">
+					    Collapse Panel
+				    </div>
+				</div>
+			</div>
+			<div class="col-md-7 col-details">
 				<a href="/"><h1>Vendeon</h1></a>
 				<div class="breadcrumb">
 					<li class="active">
@@ -136,6 +147,35 @@
 
 @push('styles')
 	<style type="text/css">
+		.col-details {
+			border-right: #ddd 1px solid;
+		}
+		.table.cart,
+		.table.price {
+			display: table;
+		}
+		@media screen and (min-width: 991px) {
+			.mobile-cart {
+				display: none;
+			}
+			.collapse.dont-collapse-sm {
+    display: block;
+    height: auto !important;
+    visibility: visible;
+  }
+		}
+		@media screen and (max-width: 991px) {
+			.col-details {
+				border-right: none;
+			}
+			.table.cart,
+			.table.price {
+				display: none;
+			}
+			.mobile-cart {
+				display: block;
+			}
+		}
 		.cart td {
 			position: relative;
 		}
